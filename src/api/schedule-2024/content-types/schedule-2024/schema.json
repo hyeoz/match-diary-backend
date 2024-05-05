@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "schedule_2024s",
+  "info": {
+    "singularName": "schedule-2024",
+    "pluralName": "schedule-2024s",
+    "displayName": "schedule_2024"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "date": {
+      "type": "date"
+    },
+    "home": {
+      "type": "string"
+    },
+    "away": {
+      "type": "string"
+    }
+  }
+}
