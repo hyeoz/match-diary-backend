@@ -16,13 +16,6 @@ npm run develop
 yarn develop
 ```
 
-### ADMIN ACCOUNT
-
-```
-ID: jenny970203@gmail.com
-PASSWORD: Lhw231225!
-```
-
 ## ⚙️ Deployment
 
 [Heroku](https://dashboard.heroku.com/apps/match-diary-backend) 를 통해 배포되었습니다.
