@@ -368,14 +368,20 @@ export interface ApiSchedule2024Schedule2024 extends Schema.CollectionType {
     singularName: 'schedule-2024';
     pluralName: 'schedule-2024s';
     displayName: 'schedule_2024';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    date: Attribute.Date;
     home: Attribute.String;
     away: Attribute.String;
+    time: Attribute.String;
+    homeScore: Attribute.Integer;
+    awayScore: Attribute.Integer;
+    stadium: Attribute.String;
+    memo: Attribute.String;
+    date: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
