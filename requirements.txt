@@ -1,0 +1,4 @@
+BeautifulSoup
+json
+load_dotenv
+os
