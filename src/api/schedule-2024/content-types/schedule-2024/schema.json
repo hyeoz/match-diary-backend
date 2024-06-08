@@ -18,14 +18,14 @@
     "away": {
       "type": "string"
     },
-    "time": {
-      "type": "string"
-    },
     "homeScore": {
       "type": "integer"
     },
     "awayScore": {
       "type": "integer"
+    },
+    "date": {
+      "type": "string"
     },
     "stadium": {
       "type": "string"
@@ -33,7 +33,7 @@
     "memo": {
       "type": "string"
     },
-    "date": {
+    "time": {
       "type": "string"
     }
   }

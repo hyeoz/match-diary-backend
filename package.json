@@ -1,35 +1,37 @@
 {
   "name": "matchdiary-backend",
-  "private": true,
   "version": "0.1.0",
+  "private": true,
   "description": "A Strapi application",
+  "license": "MIT",
+  "author": {
+    "name": "A Strapi developer"
+  },
   "scripts": {
+    "build": "strapi build",
     "develop": "strapi develop",
     "start": "strapi start",
-    "build": "strapi build",
     "strapi": "strapi"
   },
-  "devDependencies": {},
   "dependencies": {
-    "@strapi/strapi": "4.24.1",
-    "@strapi/plugin-users-permissions": "4.24.1",
-    "@strapi/plugin-i18n": "4.24.1",
     "@strapi/plugin-cloud": "4.24.1",
+    "@strapi/plugin-i18n": "4.24.1",
+    "@strapi/plugin-users-permissions": "4.24.1",
+    "@strapi/strapi": "4.24.1",
     "better-sqlite3": "8.6.0",
+    "dotenv": "^16.4.5",
+    "pg": "^8.11.5",
+    "pg-connection-string": "^2.6.4",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "5.3.4",
     "styled-components": "5.3.3"
   },
-  "author": {
-    "name": "A Strapi developer"
+  "engines": {
+    "node": ">=18.0.0 <=22.x.x",
+    "npm": ">=10.0.0"
   },
   "strapi": {
     "uuid": "b022118d-858e-4622-9bfa-ff4296a8cb9e"
-  },
-  "engines": {
-    "node": ">=18.0.0 <=20.x.x",
-    "npm": ">=6.0.0"
-  },
-  "license": "MIT"
+  }
 }

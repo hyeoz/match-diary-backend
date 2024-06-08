@@ -1,10 +1,14 @@
-# 🚀 Getting started with Strapi
+# 직관일기 백엔드
 
-Strapi comes with a full featured [Command Line Interface](https://docs.strapi.io/dev-docs/cli) (CLI) which lets you scaffold and manage your project in seconds.
+직관일기 경기정보 데이터를 위한 백엔드 서버입니다.
+
+Headless CMS 서비스 [Strapi](https://strapi.io/) 를 통해 구축되었습니다.
 
 ### `develop`
 
-Start your Strapi application with autoReload enabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+아래 명령어를 통해 로컬에서 실행이 가능합니다. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-develop)
+
+실행 후 [여기서](http://localhost:1337) 확인할 수 있습니다.
 
 ```
 npm run develop
@@ -12,29 +16,11 @@ npm run develop
 yarn develop
 ```
 
-### `start`
-
-Start your Strapi application with autoReload disabled. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-start)
-
-```
-npm run start
-# or
-yarn start
-```
-
-### `build`
-
-Build your admin panel. [Learn more](https://docs.strapi.io/dev-docs/cli#strapi-build)
-
-```
-npm run build
-# or
-yarn build
-```
-
 ## ⚙️ Deployment
 
-Strapi gives you many possible deployment options for your project including [Strapi Cloud](https://cloud.strapi.io). Browse the [deployment section of the documentation](https://docs.strapi.io/dev-docs/deployment) to find the best solution for your use case.
+[Heroku](https://dashboard.heroku.com/apps/match-diary-backend) 를 통해 배포되었습니다.
+
+배포된 URL은 [여기서](https://match-diary-backend-79e304d3a79e.herokuapp.com/) 확인 가능합니다.
 
 ## 📚 Learn more
 
