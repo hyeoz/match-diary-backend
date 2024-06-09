@@ -1,1 +1,1 @@
-worker: python /app/crawler_kbo.py
+worker: python crawler_kbo.py
