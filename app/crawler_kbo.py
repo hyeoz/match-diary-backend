@@ -5,7 +5,7 @@
 ## 1.1 2024 UPDATE - 기존에 사용하던 requests 방식 사용
 
 ### 1. 패키지 세팅 
-from beautifulsoup4 import BeautifulSoup as bs
+from bs4 import BeautifulSoup as bs
 import json
 from dotenv import load_dotenv
 import os
