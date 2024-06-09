@@ -9,6 +9,7 @@ from bs4 import BeautifulSoup as bs
 import json
 from dotenv import load_dotenv
 import os
+import requests
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
@@ -31,7 +32,9 @@ def clear_schema():
         delete_response = requests.delete(delete_url, headers=headers)
 
         if delete_response.status_code == 200:
-            print(f"Item {item_id} successfully deleted.")
+            requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
+                "text": "데이터 삭제 완료! 크롤링 시작!"
+            }))
         else:
             requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
                 "text": "데이터 삭제 중 문제 발생! 주인님 여기에요!"
