@@ -25,7 +25,13 @@ headers={
 def clear_schema():
     print("CLEAR SCHEMA START")
     response = requests.get("https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s", headers=headers)
-    items = response.json()
+    if response.status_code == 200:
+        items = response.json()
+    else:
+        requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
+            "text": "GET 요청이 실패했어요!"
+        }))
+        items = {'data': []}
 
     for item in items['data']:
         id = item['id']
