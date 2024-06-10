@@ -1,5 +1,7 @@
-bs4
-json
-dotenv
-os
+beautifulsoup4
+python-dotenv
 requests
+json
+os
+bs4
+dotenv
