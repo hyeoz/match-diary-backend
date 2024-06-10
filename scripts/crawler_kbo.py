@@ -14,7 +14,6 @@ import requests
 load_dotenv()
 api_key = os.getenv("API_KEY")
 webhook_url = os.getenv("WEBHOOK_URL")
-print(api_key + ',,,' + webhook_url)
 # heroku 서버 키
 headers={
     'Authorization': ' '.join(['Bearer', api_key]),
@@ -28,7 +27,7 @@ def clear_schema():
     if response.status_code == 200:
         items = response.json()
     else:
-        requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
+        requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dumps({
             "text": "GET 요청이 실패했어요!"
         }))
         items = {'data': []}
@@ -39,11 +38,11 @@ def clear_schema():
         delete_response = requests.delete(delete_url, headers=headers)
 
         if delete_response.status_code == 200:
-            requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
+            requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dumps({
                 "text": "데이터 삭제 완료! 크롤링 시작!"
             }))
         else:
-            requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
+            requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dumps({
                 "text": "데이터 삭제 중 문제 발생! 주인님 여기에요!"
             }))
 
@@ -134,7 +133,7 @@ def run_crawler():
     webhook_data = {
         "text": "으쌰으쌰 KBO 경기 일정 크롤링 완료!"
     }
-    requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump(webhook_data))
+    requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dumps(webhook_data))
 
 
 
