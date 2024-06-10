@@ -27,8 +27,8 @@ def clear_schema():
     response = requests.get("https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s", headers=headers)
     items = response.json()
 
-    for item in items:
-        id = item["id"]
+    for item in items['data']:
+        id = item['id']
         delete_url = f"https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s/{id}"
         delete_response = requests.delete(delete_url, headers=headers)
 
