@@ -14,7 +14,7 @@ import requests
 load_dotenv()
 api_key = os.getenv("API_KEY")
 webhook_url = os.getenv("WEBHOOK_URL")
-
+print(api_key + ',,,' + webhook_url)
 # heroku 서버 키
 headers={
     'Authorization': ' '.join(['Bearer', api_key]),
