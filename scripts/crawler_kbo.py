@@ -43,9 +43,9 @@ def clear_schema():
             }))
             return;
         
-        requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
-            "text": "데이터 삭제 완료! 크롤링 시작!"
-        }))
+    requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
+        "text": "데이터 삭제 완료! 크롤링 시작!"
+    }))
 
 # KOB 홈페이지 기준, 현재 ~0829 일정까지 공개
 def run_crawler(): 
