@@ -10,6 +10,7 @@ import json
 from dotenv import load_dotenv
 import os
 import requests
+import asyncio
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
@@ -21,13 +22,14 @@ headers={
 }
 
 # 스케쥴러 작동 시 데이터 모두 날리고 다시 넣어야 함
-def clear_schema():
+async def clear_schema():
     print("CLEAR SCHEMA START")
-    response = requests.get("https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s", headers=headers)
+    response = await requests.get("https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s", headers=headers)
+    
     if response.status_code == 200:
         items = response.json()
     else:
-        requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dumps({
+        await requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dumps({
             "text": "GET 요청이 실패했어요!"
         }))
         items = {'data': []}
@@ -35,20 +37,20 @@ def clear_schema():
     for item in items['data']:
         id = item['id']
         delete_url = f"https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s/{id}"
-        delete_response = requests.delete(delete_url, headers=headers)
+        delete_response = await requests.delete(delete_url, headers=headers)
 
         if delete_response.status_code != 200:
-            requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
+            await requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
                 "text": "데이터 삭제 중 문제 발생! 주인님 여기에요!"
             }))
             return;
         
-    requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
+    await requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
         "text": "데이터 삭제 완료! 크롤링 시작!"
     }))
 
 # KOB 홈페이지 기준, 현재 ~0829 일정까지 공개
-def run_crawler(): 
+async def run_crawler(): 
     print("RUN CRAWLER START")
 
     for month in ['03', '04', '05', '06', '07', '08']:
@@ -59,7 +61,7 @@ def run_crawler():
             "gameMonth": month,
             "teamId": ""
         }
-        r = requests.post("https://www.koreabaseball.com/ws/Schedule.asmx/GetScheduleList", data=data)
+        r = await requests.post("https://www.koreabaseball.com/ws/Schedule.asmx/GetScheduleList", data=data)
         root = json.loads(r.content.decode("utf-8"))
         
         # 크롤링한 데이터 전처리
@@ -121,7 +123,7 @@ def run_crawler():
                 formedData.append(data)        
 
         for match in formedData:
-            res = requests.post("https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s", 
+            await requests.post("https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s", 
                 headers=headers,
                 data=json.dumps(
                     {
@@ -133,10 +135,12 @@ def run_crawler():
     webhook_data = {
         "text": "으쌰으쌰 KBO 경기 일정 크롤링 완료!"
     }
-    requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dumps(webhook_data))
+    await requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dumps(webhook_data))
 
+async def main():
+    await clear_schema()
+    await run_crawler()
 
 
 if __name__ == "__main__":
-    clear_schema()
-    run_crawler()
+   asyncio.run(main())
