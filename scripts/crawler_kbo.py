@@ -38,15 +38,15 @@ def clear_schema():
         delete_url = f"https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s/{id}"
         delete_response = requests.delete(delete_url, headers=headers)
 
-        if delete_response.status_code == 200:
-            requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
-                "text": "데이터 삭제 완료! 크롤링 시작!"
-            }))
-        else:
+        if delete_response.status_code != 200:
             requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
                 "text": "데이터 삭제 중 문제 발생! 주인님 여기에요!"
             }))
-
+            return;
+        
+        requests.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dump({
+            "text": "데이터 삭제 완료! 크롤링 시작!"
+        }))
 
 # KOB 홈페이지 기준, 현재 ~0829 일정까지 공개
 def run_crawler(): 
