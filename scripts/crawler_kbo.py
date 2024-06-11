@@ -26,16 +26,31 @@ headers = {
 async def clear_schema():
     print("CLEAR SCHEMA START")
     async with httpx.AsyncClient() as client:
-        response = await client.get("https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s", headers=headers)
-        if response.status_code == 200:
-            items = response.json()
-        else:
-            await client.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dumps({
-                "text": "GET 요청이 실패했어요!"
-            }))
-            items = {'data': []}
+        page = 1
+        page_size = 50
+        
+        all_data = []
+        
+        while True:
+            url = f"https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s?pagination[page]={page}&pagination[pageSize]={page_size}"
+            response = await client.get(url, headers=headers)
+            data = response.json()
 
-        for item in items['data']:
+            if not data['data']:
+                break
+
+            all_data.extend(data['data'])
+            page += 1
+        
+        # if response.status_code == 200:
+        #     items = response.json()
+        # else:
+        #     await client.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dumps({
+        #         "text": "GET 요청이 실패했어요!"
+        #     }))
+        #     items = {'data': []}
+
+        for item in all_data:
             id = item['id']
             delete_url = f"https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s/{id}"
             delete_response = await client.delete(delete_url, headers=headers)
@@ -47,7 +62,7 @@ async def clear_schema():
                 return
         
         await client.post(webhook_url, headers={"Content-type": "application/json"}, data=json.dumps({
-            "text": f"{len(items['data'])}데이터 삭제 완료! 크롤링 시작!"
+            "text": f"{len(all_data)}데이터 삭제 완료! 크롤링 시작!"
         }))
 
 # KOB 홈페이지 기준, 현재 ~0829 일정까지 공개
