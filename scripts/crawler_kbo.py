@@ -94,7 +94,7 @@ async def run_crawler():
                 data = {}
                 if row['row'][0]['Class'] == 'day':
                     # 날짜
-                    data['date'] = f"{year}.{row['row'][0]['Text']}"
+                    data['date'] = row['row'][0]['Text']
                     data['time'] = bs(row['row'][1]['Text']).get_text()
 
                     # 경기정보
@@ -118,7 +118,7 @@ async def run_crawler():
                     formedData.append(data)
                 else:
                     # 날짜
-                    data['date'] = f"{year}.{formedData[-1]['date']}"
+                    data['date'] = formedData[-1]['date']
                     data['time'] = bs(row['row'][0]['Text']).get_text()
 
                     # 경기정보
@@ -146,7 +146,7 @@ async def run_crawler():
                     headers=headers,
                     data=json.dumps(
                         {
-                            "data": match
+                            "data": {**match, date: f"{year}.{match.date}"}
                         }
                     ),
                 )
