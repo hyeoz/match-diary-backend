@@ -76,7 +76,7 @@ async def run_crawler():
             data = {
                 "leId": '1',
                 "srIdList": '0,9,6',
-                "seasonId": year,
+                "seasonId": f"{year}",
                 "gameMonth": month,
                 "teamId": ""
             }
