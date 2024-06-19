@@ -10,6 +10,7 @@ import json
 from dotenv import load_dotenv
 import os
 import requests
+from datetime import date
 
 load_dotenv()
 api_key = os.getenv("API_KEY")
@@ -19,11 +20,12 @@ headers={
     'Authorization': ' '.join(['Bearer', api_key]),
     "Content-Type": "application/json",
 }
-
+year = date.today().year;
+print(year)
 # 스케쥴러 작동 시 데이터 모두 날리고 다시 넣어야 함
 def clear_schema():
     print("CLEAR SCHEMA START")
-    response = requests.get("https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s", headers=headers)
+    response = requests.get(f"https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-{year}s", headers=headers)
     if response.status_code == 200:
         items = response.json()
     else:
@@ -34,7 +36,7 @@ def clear_schema():
 
     for item in items['data']:
         id = item['id']
-        delete_url = f"https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s/{id}"
+        delete_url = f"https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-{year}s/{id}"
         delete_response = requests.delete(delete_url, headers=headers)
 
         if delete_response.status_code == 200:
@@ -49,13 +51,12 @@ def clear_schema():
 
 # KOB 홈페이지 기준, 현재 ~0829 일정까지 공개
 def run_crawler(): 
-    print("RUN CRAWLER START")
 
     for month in ['03', '04', '05', '06', '07', '08']:
         data = {
             "leId": '1',
             "srIdList": '0,9,6',
-            "seasonId": '2024',
+            "seasonId": year,
             "gameMonth": month,
             "teamId": ""
         }
@@ -121,7 +122,7 @@ def run_crawler():
                 formedData.append(data)        
 
         for match in formedData:
-            res = requests.post("https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-2024s", 
+            requests.post(f"https://match-diary-backend-79e304d3a79e.herokuapp.com/api/schedule-{year}s", 
                 headers=headers,
                 data=json.dumps(
                     {
