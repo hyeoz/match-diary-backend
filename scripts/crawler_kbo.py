@@ -146,7 +146,7 @@ async def run_crawler():
                     headers=headers,
                     data=json.dumps(
                         {
-                            "data": {**match, date: f"{year}.{match.date}"}
+                            "data": {**match, date: f"{year}.{match['date']}"}
                         }
                     ),
                 )
