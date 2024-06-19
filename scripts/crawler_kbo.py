@@ -23,7 +23,7 @@ headers = {
     "Content-Type": "application/json",
 }
 year = date.today().year;
-print(year)
+
 # 스케쥴러 작동 시 데이터 모두 날리고 다시 넣어야 함
 async def clear_schema():
     print("CLEAR SCHEMA START")
@@ -146,7 +146,7 @@ async def run_crawler():
                     headers=headers,
                     data=json.dumps(
                         {
-                            "data": {**match, date: f"{year}.{match['date']}"}
+                            "data": {**match, 'date': f"{year}.{match['date']}"}
                         }
                     ),
                 )
