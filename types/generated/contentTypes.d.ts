@@ -399,6 +399,38 @@ export interface ApiSchedule2024Schedule2024 extends Schema.CollectionType {
       Attribute.Private;
   };
 }
+export interface ApiCommunyCommuny extends Schema.CollectionType {
+  collectionName: "community";
+  info: {
+    singularName: "community";
+    pluralName: "community";
+    displayName: "community";
+    description: "";
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    nickname: Attribute.String;
+    content: Attribute.String;
+    stadium: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      "api::community.community",
+      "oneToOne",
+      "admin::user"
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      "api::community.community",
+      "oneToOne",
+      "admin::user"
+    > &
+      Attribute.Private;
+  };
+}
 
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: "files";
@@ -837,6 +869,7 @@ declare module "@strapi/types" {
       "admin::transfer-token": AdminTransferToken;
       "admin::transfer-token-permission": AdminTransferTokenPermission;
       "api::schedule-2024.schedule-2024": ApiSchedule2024Schedule2024;
+      "api::community.community": ApiSchedule2024Schedule2024;
       "plugin::upload.file": PluginUploadFile;
       "plugin::upload.folder": PluginUploadFolder;
       "plugin::content-releases.release": PluginContentReleasesRelease;

@@ -1,0 +1,25 @@
+{
+  "kind": "collectionType",
+  "collectionName": "community",
+  "info": {
+    "singularName": "community",
+    "pluralName": "community",
+    "displayName": "community",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "nickname": {
+      "type": "string"
+    },
+    "content": {
+      "type": "string"
+    },
+    "stadium": {
+      "type": "string"
+    }
+  }
+}
