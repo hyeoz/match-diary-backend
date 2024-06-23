@@ -399,7 +399,7 @@ export interface ApiSchedule2024Schedule2024 extends Schema.CollectionType {
       Attribute.Private;
   };
 }
-export interface ApiCommunyCommuny extends Schema.CollectionType {
+export interface ApiCommunityCommunity extends Schema.CollectionType {
   collectionName: "community";
   info: {
     singularName: "community";
