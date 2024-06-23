@@ -399,38 +399,38 @@ export interface ApiSchedule2024Schedule2024 extends Schema.CollectionType {
       Attribute.Private;
   };
 }
-export interface ApiCommunityCommunity extends Schema.CollectionType {
-  collectionName: "community";
-  info: {
-    singularName: "community";
-    pluralName: "community";
-    displayName: "community";
-    description: "";
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    nickname: Attribute.String;
-    content: Attribute.String;
-    stadium: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      "api::community.community",
-      "oneToOne",
-      "admin::user"
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      "api::community.community",
-      "oneToOne",
-      "admin::user"
-    > &
-      Attribute.Private;
-  };
-}
+// export interface ApiCommunityCommunity extends Schema.CollectionType {
+//   collectionName: "community";
+//   info: {
+//     singularName: "community";
+//     pluralName: "community";
+//     displayName: "community";
+//     description: "";
+//   };
+//   options: {
+//     draftAndPublish: true;
+//   };
+//   attributes: {
+//     nickname: Attribute.String;
+//     content: Attribute.String;
+//     stadium: Attribute.String;
+//     createdAt: Attribute.DateTime;
+//     updatedAt: Attribute.DateTime;
+//     publishedAt: Attribute.DateTime;
+//     createdBy: Attribute.Relation<
+//       "api::community.community",
+//       "oneToOne",
+//       "admin::user"
+//     > &
+//       Attribute.Private;
+//     updatedBy: Attribute.Relation<
+//       "api::community.community",
+//       "oneToOne",
+//       "admin::user"
+//     > &
+//       Attribute.Private;
+//   };
+// }
 
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: "files";
